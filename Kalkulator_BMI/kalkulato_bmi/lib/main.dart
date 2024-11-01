@@ -28,7 +28,23 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
     String weight = weightController.text;
 
     if (height.isEmpty || weight.isEmpty || selectedGender.isEmpty) {
-      print("Mohon isi semua data.");
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Input Tidak Lengkap"),
+            content: Text("Mohon isi semua data."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
     } else {
       double heightValue = double.tryParse(height) ?? 0.0;
       double weightValue = double.tryParse(weight) ?? 0.0;
